@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModernWpf.MahApps</name>
+    </assembly>
+    <members>
+        <member name="T:ModernWpf.MahApps.Strings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Strings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Strings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Strings.TimePickerAM">
+            <summary>
+              Looks up a localized string similar to AM.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Strings.TimePickerHour">
+            <summary>
+              Looks up a localized string similar to hour.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Strings.TimePickerMinute">
+            <summary>
+              Looks up a localized string similar to minute.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Strings.TimePickerSecond">
+            <summary>
+              Looks up a localized string similar to second.
+            </summary>
+        </member>
+        <member name="F:ModernWpf.MahApps.Controls.DateTimeComponentSelector.UseSystemFocusVisualsProperty">
+            <summary>
+            Identifies the UseSystemFocusVisuals dependency property.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Controls.DateTimeComponentSelector.UseSystemFocusVisuals">
+            <summary>
+            Gets or sets a value that indicates whether the control uses focus visuals that
+            are drawn by the system or those defined in the control template.
+            </summary>
+            <returns>
+            **true** if the control uses focus visuals drawn by the system; **false** if
+            the control uses focus visuals defined in the ControlTemplate. The default is
+            **false**; see Remarks.
+            </returns>
+        </member>
+        <member name="T:ModernWpf.MahApps.Controls.SimpleTimePicker">
+            <summary>
+            Represents a control that allows a user to pick a time value.
+            </summary>
+        </member>
+        <member name="M:ModernWpf.MahApps.Controls.SimpleTimePicker.#ctor">
+            <summary>
+            Initializes a new instance of the SimpleTimePicker class.
+            </summary>
+        </member>
+        <member name="F:ModernWpf.MahApps.Controls.SimpleTimePicker.UseSystemFocusVisualsProperty">
+            <summary>
+            Identifies the UseSystemFocusVisuals dependency property.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Controls.SimpleTimePicker.UseSystemFocusVisuals">
+            <summary>
+            Gets or sets a value that indicates whether the control uses focus visuals that
+            are drawn by the system or those defined in the control template.
+            </summary>
+            <returns>
+            **true** if the control uses focus visuals drawn by the system; **false** if
+            the control uses focus visuals defined in the ControlTemplate. The default is
+            **false**; see Remarks.
+            </returns>
+        </member>
+        <member name="F:ModernWpf.MahApps.Controls.SimpleTimePicker.CornerRadiusProperty">
+            <summary>
+            Identifies the CornerRadius dependency property.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Controls.SimpleTimePicker.CornerRadius">
+            <summary>
+            Gets or sets the radius for the corners of the control's border.
+            </summary>
+            <returns>
+            The degree to which the corners are rounded, expressed as values of the CornerRadius
+            structure.
+            </returns>
+        </member>
+        <member name="F:ModernWpf.MahApps.Controls.SimpleTimePicker.HeaderProperty">
+            <summary>
+            Identifies the Header dependency property.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Controls.SimpleTimePicker.Header">
+            <summary>
+            Gets or sets the content for the control's header.
+            </summary>
+            <returns>The content of the control's header. The default is **null**.</returns>
+        </member>
+        <member name="F:ModernWpf.MahApps.Controls.SimpleTimePicker.HeaderTemplateProperty">
+            <summary>
+            Identifies the HeaderTemplate dependency property.
+            </summary>
+        </member>
+        <member name="P:ModernWpf.MahApps.Controls.SimpleTimePicker.HeaderTemplate">
+            <summary>
+            Gets or sets the DataTemplate used to display the content of the control's header.
+            </summary>
+            <returns>
+            The template that specifies the visualization of the header object. The default
+            is **null**.
+            </returns>
+        </member>
+        <member name="M:ModernWpf.MahApps.Controls.SimpleTimePicker.OnApplyTemplate">
+            <summary>
+            Called when the Template's tree has been generated.
+            </summary>
+        </member>
+    </members>
+</doc>

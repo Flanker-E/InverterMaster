@@ -1,0 +1,16 @@
+﻿<Application x:Class="InverterMaster.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:InverterMaster"
+             StartupUri="MainWindow.xaml"
+             xmlns:ui="http://schemas.modernwpf.com/2019">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemeResources RequestedTheme="Light" AccentColor="Blue" />
+                <ui:XamlControlsResources />
+            </ResourceDictionary.MergedDictionaries>
+            <Thickness x:Key="ControlPageContentMargin">24,0,24,20</Thickness>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
