@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "PIESl0wZLOFHA0fK36TUJorHcrDxGz5GVlaQLaZhOU2/H/LOY1wxJTpwz+tcmTwcb4praS/TnnP3zTBOjnsPlA==",
+  "dgSpecHash": "7ovyGV/JmGX2BMz63AfVdywHwg6rvqRfSYAvDA/3ICD2ak+XhPA2Gg8fiLyodaXsxb/BnBC/5oU/QDfX+6Yx4g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Flanker\\source\\repos\\InverterMaster\\InverterMaster\\InverterMaster.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Flanker\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
     "C:\\Users\\Flanker\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
-    "C:\\Users\\Flanker\\.nuget\\packages\\microsoft.vcrtforwarders.140\\1.0.6\\microsoft.vcrtforwarders.140.1.0.6.nupkg.sha512"
+    "C:\\Users\\Flanker\\.nuget\\packages\\microsoft.vcrtforwarders.140\\1.0.6\\microsoft.vcrtforwarders.140.1.0.6.nupkg.sha512",
+    "C:\\Users\\Flanker\\.nuget\\packages\\system.windows.controls.datavisualization.toolkit\\4.0.0\\system.windows.controls.datavisualization.toolkit.4.0.0.nupkg.sha512"
   ],
   "logs": []
 }

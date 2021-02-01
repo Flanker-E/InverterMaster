@@ -41,6 +41,10 @@
             "Microsoft.VCRTForwarders.140": {
               "target": "Package",
               "version": "[1.0.6, )"
+            },
+            "System.Windows.Controls.DataVisualization.Toolkit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             }
           },
           "imports": [

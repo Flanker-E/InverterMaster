@@ -76,8 +76,10 @@ C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\bin\Debug\LiveCharts
 C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\bin\Debug\LiveCharts.pdb
 C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\bin\Debug\LiveCharts.Wpf.dll
 C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\bin\Debug\LiveCharts.Wpf.pdb
-C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\obj\Debug\Uc_Plot.g.cs
-C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\obj\Debug\Uc_Plot.baml
 C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\obj\Debug\Uc_SerialPort.g.cs
 C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\obj\Debug\Uc_SerialPort.baml
+C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\bin\Debug\InverterMaster.exe.manifest
+C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\bin\Debug\InverterMaster.application
+C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\obj\Debug\InverterMaster.exe.manifest
+C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\obj\Debug\InverterMaster.application
+C:\Users\Flanker\source\repos\InverterMaster\InverterMaster\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll

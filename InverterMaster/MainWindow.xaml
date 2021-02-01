@@ -6,14 +6,22 @@
     xmlns:local="clr-namespace:InverterMaster"
     xmlns:xamlHost="clr-namespace:Microsoft.Toolkit.Wpf.UI.XamlHost;assembly=Microsoft.Toolkit.Wpf.UI.XamlHost"
     xmlns:ui="http://schemas.modernwpf.com/2019"
+    xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"  
+    xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="InverterMaster.MainWindow"
     mc:Ignorable="d"
     Title="MainWindow" Height="600" Width="1025"
     ui:WindowHelper.UseModernWindowStyle="True">
-
-   <!-- <ui:SimpleStackPanel Margin="10,-16,12,12" Spacing="24"> -->
-    <Grid>
-        <Grid.RowDefinitions>
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/ModernWpf;component/DensityStyles/Compact.xaml" />
+    </Window.Resources>
+    <!--<Window.Resources>
+        <local:ActualValueList x:Key="ActualValueListData"/>
+    </Window.Resources>
+    <ui:SimpleStackPanel Margin="10,-16,12,12" Spacing="24"> -->
+    <DockPanel>
+        <!-- <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -21,9 +29,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        
-        <Grid Grid.ColumnSpan="2">
+        </Grid.ColumnDefinitions>-->
+
+        <Grid DockPanel.Dock="Top" Name="menuBar">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
@@ -54,86 +62,331 @@
 
         </Grid>
         
-        <TabControl 
-            Grid.Row="1"
-            HorizontalAlignment="Left" 
-            Height="490" 
-            Width="800" 
-            TabStripPlacement="Bottom">
-            <TabItem Header="Variables">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Plots">
-                <local:Uc_Plot/>
-              <!--  <Grid Background="#FFE5E5E5"/>-->
-            </TabItem>
-            <TabItem Header="Tuning">
-                <Grid Background="#FFE5E5E5">
-                    <Button x:Name="Button_tune" Content="I am a button" Margin="330,124,0,291" VerticalAlignment="Stretch" Width="153" />
-                    <Button Content="I am an accent button" Style="{StaticResource AccentButtonStyle}" Margin="319,130,0,-130" />
+        <StatusBar  DockPanel.Dock="Bottom" Name="statusBar" Background="#FF007ACC" Padding="2" Height="30">
+            <StatusBarItem HorizontalAlignment="Left">
+                <TextBlock 
+                    Name="statusInfoTextBlock" 
+                    Foreground="White">
+                    Ready
+                </TextBlock>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Name="timeDateTextBlock" Foreground="White"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        
+        <Grid>
+            <DockPanel>
+                <Grid DockPanel.Dock="Left" Margin="12">
+                    <ui:ThemeShadowChrome
+                        IsShadowEnabled="True"
+                        Depth="20">
+                        <ScrollViewer  
+                            Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <ui:SimpleStackPanel 
+                                Margin="10" 
+                                Spacing="12">
+                                <HeaderedContentControl Header="SetPints" FontSize="18">
+                                    <ui:SimpleStackPanel
+                                        Name="SetValuesPanel"
+                                        Spacing="2">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Grid.Column="0" Content="Enable"></CheckBox>
+                                            <CheckBox Grid.Column="1" Content="ErrorReset"></CheckBox>
+                                        </Grid>
+                                        
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox
+                                                Grid.Column="0"
+                                                ui:ControlHelper.Header="VelocityLimitP"
+                                                HorizontalAlignment="Left"
+                                                Width="100"
+                                                Text="" />
+                                            <TextBox
+                                                Grid.Column="1"
+                                                ui:ControlHelper.Header="VelocityLimitN"
+                                                HorizontalAlignment="Left"
+                                                Width="100"
+                                                Text="" />
+                                        </Grid>
+                                        <TextBox
+                                            ui:ControlHelper.Header="TargetTorque"
+                                            HorizontalAlignment="Left"
+                                            Width="100"
+                                            Text="" />
+                                        
+                                    </ui:SimpleStackPanel>
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="ActualValues" FontSize="18">
+                                    <DataGrid 
+                                        x:Name="ActualValuesGrid"
+                                        HeadersVisibility="Column"
+                                        GridLinesVisibility="Vertical"
+                                        CanUserResizeColumns="False"
+                                        CanUserResizeRows="False"
+                                        CanUserSortColumns="False"
+                                        IsReadOnly="True"
+                                        Height="Auto" 
+                                        Width="241">
+                                        <!--ItemsSource="{Binding Source=ActualValues}"ItemsSource="{Binding Mode=OneWay, Source={StaticResource ActualValueListData}}"-->
+                                    </DataGrid>
+                                </HeaderedContentControl>
+                            </ui:SimpleStackPanel>
+                        </ScrollViewer>
+                    </ui:ThemeShadowChrome>
                 </Grid>
-            </TabItem>
-        </TabControl>
-        <ScrollViewer Margin="12"
-              Grid.Row="1" 
-              Grid.Column="1" 
-              Background="#FFE5E5E5">
-            <ui:SimpleStackPanel
-                Spacing="24"
-                Margin="{StaticResource ControlPageContentMargin}">
-                <ComboBox 
-                    x:Name="ConboBox_Port" 
-                    ui:ControlHelper.Header="Select Port"
-                    HorizontalAlignment="Left" 
-                    Width="150" Margin="0,20,0,0"/>
-                <Button 
-                    x:Name="Button_Connect" 
-                    Click="Button_Connect_Click"
-                    Content="CONNECT"  
-                    Width="150"  />
-                
-                <Expander 
-                    Header="Print" 
-                    Width="150">
-                    <RichTextBox 
-                        Name="recvDataRichTextBox"
-                        Background="White"
-                        Height="300"
-                        BorderThickness="0" 
-                        IsReadOnly="True">
-                            <FlowDocument 
-                                LineHeight="1.5" 
-                                FontSize="14">
-                            </FlowDocument>
-                    </RichTextBox>
-                </Expander>
-                <Button
-                    x:Name="Button_clearRecvDataBox"
-                    Click="Button_clearRecvDataBox_Click"
-                    Content="CLEAR RECEIVED"
-                    Width=" 150"/>
-            </ui:SimpleStackPanel>
+               
+                <Grid Name="serialCommunicationConfigPanel" DockPanel.Dock="Right" Margin="12" Visibility="Visible">
+                    <ui:ThemeShadowChrome
+                        IsShadowEnabled="True"
+                        Depth="20">
+                        <ScrollViewer 
+                            HorizontalScrollBarVisibility="Auto" 
+                            VerticalScrollBarVisibility="Auto" 
+                            Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <ui:SimpleStackPanel
+                                Spacing="24"
+                                Margin="10">
+                                <ComboBox 
+                                    x:Name="ConboBox_Port" 
+                                    ui:ControlHelper.Header="Select Port"
+                                    HorizontalAlignment="Left" 
+                                    Width="150" Margin="0,20,0,0"/>
+                                <Button 
+                                    x:Name="Button_Connect" 
+                                    Click="Button_Connect_Click"
+                                    Content="CONNECT"  
+                                    Width="150"  />
+                                <Expander 
+                                    Header="Print" 
+                                    Width="150">
+                                    <RichTextBox 
+                                        Name="recvDataRichTextBox"
+                                        Background="White"
+                                        Height="300"
+                                        BorderThickness="0" 
+                                        IsReadOnly="True">
+                                        <FlowDocument 
+                                            LineHeight="1.5" 
+                                            FontSize="14">
+                                        </FlowDocument>
+                                    </RichTextBox>
+                                </Expander>
+                                <Button
+                                    x:Name="Button_clearRecvDataBox"
+                                    Click="Button_clearRecvDataBox_Click"
+                                    Content="CLEAR RECEIVED"
+                                    Width=" 150"/>
+                            </ui:SimpleStackPanel>
+                        </ScrollViewer>
+                    </ui:ThemeShadowChrome>
+                </Grid>
+                <Grid DockPanel.Dock="Bottom" Margin="0,12,0,12">
+                    <ui:ThemeShadowChrome
+                        IsShadowEnabled="True"
+                        Depth="20">
+                        <Grid
+                            Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer>
+                                <ui:SimpleStackPanel
+                                    Spacing="6"
+                                    Margin="10"
+                                    Grid.Column="0">
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Slider
+                                            x:Name="Slider1"
+                                            Width="100"
+                                            TickFrequency="10"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            TickPlacement="Both"
+                                            Value="{Binding ElementName=ProgressValue, Path=Value, Mode=TwoWay}"/>
+                                        <TextBlock
+                                            x:Name="Control1Output"
+                                            Width="30"
+                                            TextAlignment="Center" />
+                                        <TextBlock
+                                            x:Name="ProgresLabel"
+                                            Text="Progress"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,10,0" />
+                                        <ui:NumberBox
+                                            x:Name="ProgressValue"
+                                            AutomationProperties.LabeledBy="{Binding ElementName=ProgresLabel}"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            Value="0"
+                                            SpinButtonPlacementMode="Inline" /> 
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Slider
+                                            x:Name="Slider2"
+                                            Width="100"
+                                            TickFrequency="10"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            TickPlacement="Both"
+                                            Value="{Binding ElementName=ProgressValue2, Path=Value, Mode=TwoWay}"/>
+                                        <TextBlock
+                                            x:Name="Control2Output"
+                                            Width="30"
+                                            TextAlignment="Center" />
+                                        <TextBlock
+                                            x:Name="ProgresLabel2"
+                                            Text="Progress"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,10,0" />
+                                        <ui:NumberBox
+                                            x:Name="ProgressValue2"
+                                            AutomationProperties.LabeledBy="{Binding ElementName=ProgresLabel2}"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            Value="0"
+                                            SpinButtonPlacementMode="Inline" />
+                                        </StackPanel>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Slider
+                                            x:Name="Slider3"
+                                            Width="100"
+                                            TickFrequency="10"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            TickPlacement="Both"
+                                            Value="{Binding ElementName=ProgressValue3, Path=Value, Mode=TwoWay}"/>
+                                        <TextBlock
+                                            x:Name="Control3Output"
+                                            Width="30"
+                                            TextAlignment="Center" />
+                                        <TextBlock
+                                            x:Name="ProgresLabel3"
+                                            Text="Progress"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,10,0" />
+                                        <ui:NumberBox
+                                            x:Name="ProgressValue3"
+                                            AutomationProperties.LabeledBy="{Binding ElementName=ProgresLabel3}"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            Value="0"
+                                            SpinButtonPlacementMode="Inline" />
+                                        </StackPanel>
+                                    </ui:SimpleStackPanel>
+                            </ScrollViewer>
+                            <ui:SimpleStackPanel
+                                Spacing="12"
+                                Margin="10"
+                                Grid.Column="1">
+                                <Button 
+                                x:Name="Button3" 
+                                Content="Test"  
+                                Width="auto"  />
 
+                                <Button
+                                x:Name="Button4"
+                                Content="RESET"
+                                Width="auto"/>
+                            </ui:SimpleStackPanel>
+                            <Grid
+                            Grid.Column="2"
+                            Margin="7"
+                            Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
+                            <ui:SimpleStackPanel
+                            Margin="10"
+                            Spacing="12">
+                                <ui:ToggleSwitch
+                                    x:Name="ProgressToggle"
+                                    Header="TuningMode"
+                                    OffContent="OFF"
+                                    OnContent="ON"
+                                    IsOn="False" />
 
-        </ScrollViewer>
-        <!--<local:Uc_SerialPort 
-            Grid.Row="1"
-            Grid.Column="1"/>-->
-        <Grid Grid.Row="2" Grid.ColumnSpan="2">
-            <StatusBar  Name="statusBar" Background="#FF007ACC" Padding="2" Height="30">
-                <StatusBarItem HorizontalAlignment="Left">
-                    <TextBlock 
-                        Name="statusInfoTextBlock" 
-                        Foreground="White">
-                        Welcome to InverterMaster!
-                    </TextBlock>
-                </StatusBarItem>
-                <StatusBarItem HorizontalAlignment="Right">
-                    <TextBlock Name="timeDateTextBlock" Foreground="White"></TextBlock>
-                </StatusBarItem>
-            </StatusBar>
+                                <Button
+                                    x:Name="Button2"
+                                    Content="SetTuneValue"
+                                    Width="Auto"/>
+
+                        </ui:SimpleStackPanel>
+                        </Grid>
+                        </Grid>
+                    </ui:ThemeShadowChrome>
+                </Grid>
+
+                <Grid Margin="0,12,0,0">
+                <ui:ThemeShadowChrome
+                        IsShadowEnabled="True"
+                        Depth="10">
+                    <ScrollViewer>
+                    <ui:SimpleStackPanel Spacing="7" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                    
+                    <Button Click="InjectStopOnClick">
+                        Inject/Stop Data
+                    </Button>
+                    <Label x:Name="testtext"  Content="Interval test"/>
+                    <!--Here we disable tooltips and hovering to get a better performance-->
+                    
+                    <lvc:CartesianChart Height="200" DisableAnimations="True" Hoverable="False" DataTooltip="{x:Null}">
+                        <lvc:CartesianChart.Series>
+                            <lvc:LineSeries Values="{Binding ChartValues}" 
+                                PointGeometry="{x:Null}" 
+                                LineSmoothness="0.3" 
+                                StrokeThickness="1" 
+                                Stroke="#F34336"
+                                Fill="Transparent"/>
+                        </lvc:CartesianChart.Series>
+                        <!--<lvc:CartesianChart.AxisX>
+                            <lvc:Axis  ShowLabels="False"></lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                        -->
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
+                                  MaxValue="{Binding AxisMax}" 
+                                  MinValue="{Binding AxisMin}"
+                                  Unit="{Binding AxisUnit}">
+
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                        <!--  -->
+                    </lvc:CartesianChart>
+                    <lvc:CartesianChart Height="200" DisableAnimations="True" Hoverable="False" DataTooltip="{x:Null}">
+                        <lvc:CartesianChart.Series>
+                            <lvc:LineSeries Values="{Binding ChartValues}" 
+                            PointGeometry="{x:Null}" 
+                            LineSmoothness="0.3" 
+                            StrokeThickness="1" 
+                            Stroke="#F34336"
+                            Fill="Transparent"/>
+                        </lvc:CartesianChart.Series>
+                            
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
+                                MaxValue="{Binding AxisMax}" 
+                                MinValue="{Binding AxisMin}"
+                                Unit="{Binding AxisUnit}">
+
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                    </lvc:CartesianChart>
+
+                    </ui:SimpleStackPanel>
+                    </ScrollViewer>
+                </ui:ThemeShadowChrome>
+                </Grid>
+            </DockPanel>
         </Grid>
-    </Grid>
+    </DockPanel>
 
     <!-- </ui:SimpleStackPanel>-->
 </Window>
